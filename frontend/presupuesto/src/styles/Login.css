@@ -1,0 +1,36 @@
+.container{
+    text-align: center;
+    margin:0 auto;
+    width: 80%;
+}
+.btn{
+    
+    margin:2px;
+    height:40px;
+    border: 2px solid #6b686898;
+    border-radius: 10px;
+    font-weight: bold;
+    cursor: pointer;
+    
+}
+.text{
+    height: 30px;
+    display: inline-block;
+    min-width: 30%;
+    text-align: center;
+    border: 2px solid #6b686898;
+    border-radius: 15px 0px 15px;
+    margin-bottom: 10px;    
+}
+.loginForm{
+    display: inline-block;
+    margin:0 auto;
+    margin-top:15%;
+    padding:10% 0px;
+    width: 100%;    
+}
+label{
+    display: inline-block;
+    margin-bottom: 10px;
+    font-weight: bold;
+}
