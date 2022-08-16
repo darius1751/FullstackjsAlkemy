@@ -11,9 +11,9 @@ export class UserDB{
         const connection:Connection =  await this.connectionDB.open();
         await connection.query('CALL create_credential(?,?);',[user.credential?.email,user.credential?.password]);
         let credentialId = (await connection.query('SELECT id FROM credential WHERE email = ?',[user.credential?.email]))[0].id;
-        let data = await connection.query('INSERT INTO person(name,birthday,credential_id) VALUES(?,?,?)',[user.name,user.birthday,credentialId]);
+        await connection.query('INSERT INTO person(name,birthday,credential_id) VALUES(?,?,?)',[user.name,user.birthday,credentialId]);
         connection.destroy();
-        return data;
+        return user;
     }
     public async login(credential:Credential):Promise<User>{
          const connection:Connection = await this.connectionDB.open();
@@ -30,6 +30,7 @@ export class UserDB{
     public async getAll():Promise<User[]>{
         const connection:Connection = await this.connectionDB.open();
         let users:User[] = await connection.query('SELECT id, name,birthday,created_at FROM person');
+        connection.destroy();
         return users;
     }
 }

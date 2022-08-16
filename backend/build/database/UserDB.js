@@ -21,9 +21,9 @@ class UserDB {
             const connection = yield this.connectionDB.open();
             yield connection.query('CALL create_credential(?,?);', [(_a = user.credential) === null || _a === void 0 ? void 0 : _a.email, (_b = user.credential) === null || _b === void 0 ? void 0 : _b.password]);
             let credentialId = (yield connection.query('SELECT id FROM credential WHERE email = ?', [(_c = user.credential) === null || _c === void 0 ? void 0 : _c.email]))[0].id;
-            let data = yield connection.query('INSERT INTO person(name,birthday,credential_id) VALUES(?,?,?)', [user.name, user.birthday, credentialId]);
+            yield connection.query('INSERT INTO person(name,birthday,credential_id) VALUES(?,?,?)', [user.name, user.birthday, credentialId]);
             connection.destroy();
-            return data;
+            return user;
         });
     }
     login(credential) {
@@ -45,6 +45,7 @@ class UserDB {
         return __awaiter(this, void 0, void 0, function* () {
             const connection = yield this.connectionDB.open();
             let users = yield connection.query('SELECT id, name,birthday,created_at FROM person');
+            connection.destroy();
             return users;
         });
     }

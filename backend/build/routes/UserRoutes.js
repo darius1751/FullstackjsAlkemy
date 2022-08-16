@@ -10,17 +10,21 @@ class UserRoutes {
         this.getAll = this.getAll.bind(this);
     }
     register(req, res) {
+        console.log(req.body);
         this.userService.register(req.body)
             .then((insert) => {
             console.log(insert);
             res.send(insert);
+        })
+            .catch((e) => {
+            res.status(500).send(e);
         });
     }
     login(req, res) {
         this.userService.login(req.body)
             .then(v => {
             console.log(v);
-            res.send(v);
+            res.status(200).send(v);
         });
     }
     getAll(req, res) {

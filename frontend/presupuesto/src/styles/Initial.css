@@ -1,0 +1,46 @@
+.btn{
+    
+    margin:2px;
+    height:40px;
+    border: 2px solid #6b686898;
+    border-radius: 10px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-bottom: 20px;
+    
+}
+.text{
+    height: 30px;
+    display: inline-block;
+    min-width: 300px;
+    width: 40%;
+    text-align: center;
+    border: 2px solid #6b686898;
+    border-radius: 15px 0px 15px;
+    margin-bottom: 10px;    
+}
+.logo{
+    width: 10%;
+}
+.icon{
+    position: absolute;
+    left: 2.5%;
+    top:2.7px;
+    width: 26px;
+    height: 26px;
+    
+}
+.input-icon{
+    position: relative;
+    display: inline-block;
+    
+}
+.btn-accept{
+    background-color: #709c70;
+}
+.btn-error{
+    background-color: crimson;
+}
+.btn-auth-error{
+    background-color: #a53f17;
+}
