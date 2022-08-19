@@ -1,0 +1,22 @@
+.list-movements li {
+    text-align: left;
+    list-style:none;
+    /*color:#01020c;*/
+}
+.list-movements{
+    color:#01020c;
+    border-radius: 10px 0px;
+}
+ul.list-movement{
+    padding: 0px;
+}
+.list-movements.movement-income{
+    width: 30%;
+    float:left;
+    background-color: greenyellow;
+}
+.list-movements.movement-egress{
+    width: 30%;
+    float:right;
+    background-color: orangered;
+}

@@ -1,6 +1,6 @@
 import { createContext, useReducer } from "react";
 import { initialUserReducer, userReducer } from "../reducers/UserReducer";
-export const UserContext = createContext({});
+export const UserContext = createContext<any>({});
 
 const UserProvider = ({children = (<></>)}) =>{
     const [user,dispathUser] = useReducer(userReducer,initialUserReducer);

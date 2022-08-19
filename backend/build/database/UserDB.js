@@ -11,6 +11,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.UserDB = void 0;
 const ConnectionDB_1 = require("../connection/ConnectionDB");
+const MovementDB_1 = require("./MovementDB");
 class UserDB {
     constructor() {
         this.connectionDB = new ConnectionDB_1.ConnectionDB();
@@ -22,7 +23,9 @@ class UserDB {
             yield connection.query('CALL create_credential(?,?);', [(_a = user.credential) === null || _a === void 0 ? void 0 : _a.email, (_b = user.credential) === null || _b === void 0 ? void 0 : _b.password]);
             let credentialId = (yield connection.query('SELECT id FROM credential WHERE email = ?', [(_c = user.credential) === null || _c === void 0 ? void 0 : _c.email]))[0].id;
             yield connection.query('INSERT INTO person(name,birthday,credential_id) VALUES(?,?,?)', [user.name, user.birthday, credentialId]);
+            const userId = yield connection.query(`SELECT id FROM person WHERE credential_id = ?`, [credentialId]);
             connection.destroy();
+            user.id = userId || -1;
             return user;
         });
     }
@@ -35,6 +38,9 @@ class UserDB {
                 /*user.credential = {};
                 user.credential.id = validateCredential.id;*/
                 connection.destroy();
+                user.movements = yield new MovementDB_1.MovementDB().getAllByUserId(user.id || -1);
+                if (user.id)
+                    user.balance = yield this.getBalanceByUserId(user.id);
                 return user;
             }
             else
@@ -47,6 +53,20 @@ class UserDB {
             let users = yield connection.query('SELECT id, name,birthday,created_at FROM person');
             connection.destroy();
             return users;
+        });
+    }
+    getBalanceByUserId(id) {
+        return __awaiter(this, void 0, void 0, function* () {
+            let balance = 0;
+            const connection = yield this.connectionDB.open();
+            (yield new MovementDB_1.MovementDB().getAllByUserId(id))
+                .forEach((movement) => {
+                if (movement.typeMovement.id === 1)
+                    balance += movement.balance || 0;
+                else
+                    balance -= movement.balance || 0;
+            });
+            return balance;
         });
     }
 }

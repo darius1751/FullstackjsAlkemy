@@ -1,7 +1,6 @@
-.container{
-    width: 80%;
-}
+
 .registerForm{
+    position: relative;
     width: 100%;
     margin: 0 auto;
     margin-top: 15%;

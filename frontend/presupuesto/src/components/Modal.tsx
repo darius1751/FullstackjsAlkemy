@@ -5,7 +5,7 @@ import authError from '../assets/icons/errorAuth.png';
 import error from '../assets/icons/error.png';
 import info from '../assets/icons/info.png';
 import accept from '../assets/icons/accept.png';
-export const Modal = ({description = '',title = 'Informacion',type = TypesModal.INFO,handleAcept = ()=>{}}) => {
+export const Modal = ({description = '',title = 'Informacion',type = TypesModal.INFO,handleAccept = () => {}}) => {
     const images = [
         {
             image:error,
@@ -31,7 +31,7 @@ export const Modal = ({description = '',title = 'Informacion',type = TypesModal.
     return (
         <div className="container-modal">
             <div className="modal">
-                <img src={images[type].image} className='modal-icon' alt={images[type].alt}/>
+                <img src={images[type].image} className='modal-icon' alt = {images[type].alt}/>
                 <header className="modal-title">
                     <h4>{title}</h4>
                 </header>
@@ -39,7 +39,7 @@ export const Modal = ({description = '',title = 'Informacion',type = TypesModal.
                     {description}
                 </article>
                 <br/>
-                <button onClick={handleAcept} className={`btn ${images[type].style}`}>aceptar</button>
+                <button onClick={handleAccept} className={`btn ${images[type].style}`}>aceptar</button>
             </div>
         </div>
     )

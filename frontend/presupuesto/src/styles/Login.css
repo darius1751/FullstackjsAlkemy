@@ -1,11 +1,9 @@
-.container{
-    text-align: center;
-    margin:0 auto;
-    width: 80%;
-}
+
 .loginForm{
     display: inline-block;
+    position: relative;
     margin:0 auto;
+    top:2%;
     margin-top:5%;
     padding-top:10%;
     width: 100%;

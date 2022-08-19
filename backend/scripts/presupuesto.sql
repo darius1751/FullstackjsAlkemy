@@ -69,9 +69,9 @@ CREATE PROCEDURE get_user(IN user_credential_id INT)
 CREATE PROCEDURE get_movements_by_user_id(IN user_id INT)
     SELECT m.id, m.description, m.balance, m.created_at, tm.id AS 'tmId', tm.name AS 'tmName', cp.id AS 'categoryId', cp.name AS 'categoryName'
     FROM movement AS m
-    INNER JOIN type_movement AS tm 
+    LEFT JOIN type_movement AS tm 
     ON m.type_movement_id = tm.id 
-    INNER JOIN categories_personal AS cp 
+    LEFT JOIN categories_personal AS cp 
     ON m.category_personal_id = cp.id
     WHERE m.person_id = user_id;
 

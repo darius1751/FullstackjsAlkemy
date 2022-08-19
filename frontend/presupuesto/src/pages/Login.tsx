@@ -12,6 +12,8 @@ import { User } from '../model/User';
 import { URLS } from '../constants/URLS';
 import { UserContext } from '../context/UserContext';
 import { UserActions } from '../constants/UserActions';
+import { Nav } from '../components/Nav';
+
 const initialLogin = {
     email:'',
     password:''
@@ -50,6 +52,7 @@ export const Login = () => {
     }
     return (
         <div>
+            <Nav/>
             <div className='container'>                
                 <form className="loginForm" onSubmit={handleLogin}>
                     <img src={loginLogo} alt="Login logo" className='logo'/>
@@ -69,10 +72,10 @@ export const Login = () => {
                     </div>
                     <br/>
                     <br/>
-                    <input type="submit" name='login' value='Iniciar sesion' title="Iniciar sesion ahora" className='btn'/>
+                    <input type="submit" name='login' value='Iniciar sesion' title="Iniciar sesion ahora" className='btn btn-add'/>
                 </form>
                     <NavLink to='/register'>Aun no te has registrado?</NavLink>
-                {modal && <Modal handleAcept={handleAcceptModal} title='Error al autentificar' type = {TypesModal.ERROR_AUTH} description ='Usuario y/o contrase&ntilde;a incorrecta(s), por favor vuelva a intentarlo'/>}
+                {modal && <Modal handleAccept={handleAcceptModal} title='Error al autentificar' type = {TypesModal.ERROR_AUTH} description ='Usuario y/o contrase&ntilde;a incorrecta(s), por favor vuelva a intentarlo'/>}
             </div>
         </div>
     );

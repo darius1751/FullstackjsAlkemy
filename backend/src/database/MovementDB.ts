@@ -15,7 +15,7 @@ export class MovementDB{
             if(results.length > 0){
                 results.forEach((movement)=>{
                     //m.id, m.description, m.balance, m.created_at AS createdAt, tm.id AS 'tmId', tm.name AS 'tmName', cp.id AS 'categoryId', cp.name AS 'categoryName'
-                    const {id,description,balance,createdAt,tmId,tmName,categoryId,categoryName} = movement;
+                    const {id,description,balance,created_at:createdAt,tmId,tmName,categoryId,categoryName} = movement;
                     movements.push({
                         id,
                         balance,
