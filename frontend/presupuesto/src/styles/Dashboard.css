@@ -20,3 +20,13 @@ ul.list-movement{
     float:right;
     background-color: orangered;
 }
+.balance{
+    background-color: #8dbdda;
+    max-height: 54px;
+    height: 25%;
+    border-radius: 20px 0px;
+    color:#01020c;
+}
+.cash{
+    color:green;
+}

@@ -4,11 +4,10 @@ import { ListMovements } from "../components/ListMovements";
 import { TypeMovement } from "../constants/TypeMovement";
 import { UserContext } from "../context/UserContext"
 import { User } from "../model/User";
-/*import { user } from "../model/user";
-import { initialuserReducer } from "../reducers/userReducer";*/
+import { NavDashboard } from "../components/NavDashboard";
 import '../styles/Initial.css';
 import '../styles/Dashboard.css';
-import { NavDashboard } from "../components/NavDashboard";
+
 
 export const Dashboard = () => {
     const {user} = useContext<{user:User,dispatch:any}>(UserContext);
@@ -24,7 +23,10 @@ export const Dashboard = () => {
             <div className = "container">
                 Bienvenido: <strong>{user.name} </strong>
                 <br/>
-                Balance: ${user.balance || "0"}
+                <h1 className = "balance">
+                    Balance: <span className = "cash">${user.balance || "0"}</span>
+                </h1>
+                
                 <div>
                     <div className = "list-movements movement-income">
                         <ListMovements type = {TypeMovement.INGRESOS} movements = {user.movements?.filter((v)=>v.typeMovement.id === 1)}/>

@@ -1,2 +1,8 @@
-<h2>npm start: RUN APP</h2>
-<h2>npm run build: Build js</h2>
+### `npm start`
+
+Realiza la ejecucion de la aplicacion,
+localhost:8080
+
+### `npm run build`
+
+Transpila el codigo Typescript a codigo Javascript para poder ejecutarlo `build` folder.\
