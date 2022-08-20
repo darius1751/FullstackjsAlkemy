@@ -14,6 +14,7 @@ class UserController {
         this.routes.post('/register', this.userRoutes.register);
         this.routes.post('/login', this.userRoutes.login);
         this.routes.get('/getAll', this.userRoutes.getAll);
+        this.routes.get('/getBalance/:id', this.userRoutes.getBalance);
     }
 }
 exports.UserController = UserController;

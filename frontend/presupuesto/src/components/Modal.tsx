@@ -30,16 +30,17 @@ export const Modal = ({description = '',title = 'Informacion',type = TypesModal.
     ];
     return (
         <div className="container-modal">
-            <div className="modal">
-                <img src={images[type].image} className='modal-icon' alt = {images[type].alt}/>
-                <header className="modal-title">
-                    <h4>{title}</h4>
-                </header>
-                <article className="modal-description">
-                    {description}
-                </article>
-                <br/>
-                <button onClick={handleAccept} className={`btn ${images[type].style}`}>aceptar</button>
+            <div className = "modal">
+                    <img src={images[type].image} className='modal-icon' alt = {images[type].alt}/>
+                    <header className="modal-title">
+                        <h4>{title}</h4>
+                    </header>
+                    <article className="modal-description">
+                        {description}
+                    </article>
+                    <br/>
+                    <button onClick={handleAccept} className={`btn ${images[type].style}`}>aceptar</button>
+                
             </div>
         </div>
     )

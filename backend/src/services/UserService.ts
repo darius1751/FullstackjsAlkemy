@@ -15,4 +15,7 @@ export class UserService{
     public async getAll():Promise<User[]>{
         return await this.userDB.getAll();
     }
+    public async getBalance(id:number):Promise<number>{
+        return await this.userDB.getBalanceByUserId(id);
+    }
 }

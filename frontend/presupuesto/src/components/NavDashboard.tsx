@@ -18,12 +18,12 @@ export const NavDashboard = () => {
                     
                 </li>
                 <li className = "item-nav-list">
-                    <NavLink to = 'dashboard/create_movement'>
+                    <NavLink to = {`/dashboard/create_movement`}>
                         Crear
                     </NavLink>
                     </li>
                 <li className = "item-nav-list">
-                    <NavLink to = {`/dashboard`}>
+                    <NavLink to = {`/dashboard/history`}>
                         Historial
                     </NavLink>
                 </li>

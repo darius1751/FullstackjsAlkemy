@@ -30,5 +30,10 @@ class UserService {
             return yield this.userDB.getAll();
         });
     }
+    getBalance(id) {
+        return __awaiter(this, void 0, void 0, function* () {
+            return yield this.userDB.getBalanceByUserId(id);
+        });
+    }
 }
 exports.UserService = UserService;

@@ -1,7 +1,10 @@
 import { useContext, useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
+import { Modal } from "../components/Modal";
 import { NavDashboard } from "../components/NavDashboard";
+import { TypesModal } from "../constants/TypesModal";
 import { URLS } from "../constants/URLS";
+import { UserActions } from "../constants/UserActions";
 import { UserContext } from "../context/UserContext";
 import { Movement } from "../model/Movement";
 import { User } from "../model/User";
@@ -12,9 +15,16 @@ const initialMovement = {
     balance:0,
     description:''
 }
+const initialModal = {
+    state:false,
+    title:"",
+    description:"",
+    type:TypesModal.ERROR
+}
 export const CreateMovement = () => {
-    const {user} = useContext<{user:User,dispathUser:any}>(UserContext);
+    const {user,dispathUser} = useContext<{user:User,dispathUser:any}>(UserContext);
     const [movement,setMovement] = useState(initialMovement);
+    const [modal, setModal] = useState(initialModal);
     const historyHook = useHistory();
     let httpService:HttpService<Movement> = new HttpService();
     useEffect(() => {
@@ -23,6 +33,9 @@ export const CreateMovement = () => {
     })
     const handleChange = (e:any) => {
         setMovement({...movement,[e.target.name]:e.target.value});
+    }
+    const handleAccept = ( ) => {
+        setModal(initialModal);
     }
     const handleSubmit = (e:any) => {
         e.preventDefault();
@@ -38,16 +51,43 @@ export const CreateMovement = () => {
         
         httpService.httpPost(URLS.CREATE_MOVEMENT,{body})
         .then((m)=>{
-            console.log(m);
+            setModal({
+                state:true,
+                description:'Se a creado correctamente el movimiento',
+                title:"Creacion movimiento existoso",
+                type:TypesModal.ACCEPT
+            });
+            httpService.httpGet(`${URLS.GET_ALL_MOVEMENTS}${user.id}`)
+            .then((movements) => {
+                dispathUser({type:UserActions.UPDATE_MOVEMENTS,payload:{
+                        movements:movements
+                    }
+                })
+                updateBalance();
+            })
+            
+            
         })
         .catch((err)=>{
             console.log("Error: ",err);
+            setModal({
+                state:true,
+                description:'No fue posible crear el movimiento',
+                title:"Error",
+                type:TypesModal.ERROR
+            });
+        })
+    }
+    const updateBalance = ()=>{
+        new HttpService<any>().httpGet(`${URLS.GET_BALANCE}${user.id}`)
+        .then(data =>{
+            dispathUser({type:UserActions.UPDATE_BALANCE,payload:{balance:data.balace}});
         })
     }
     return (
         <div>
             <NavDashboard/>
-            <div className="container">
+            <div className = "container">
                 <form onSubmit = {handleSubmit}>
                     <label htmlFor = 'typeMovement'>Tipo de movimiento: </label>
                     <br/>
@@ -68,6 +108,7 @@ export const CreateMovement = () => {
                     <input type = 'reset' value = 'limpiar' className = "btn btn-error"/>
                 </form>
             </div>            
-        </div>
+            { modal.state && <Modal title = {modal.title} description = {modal.description} type = {modal.type} handleAccept = {handleAccept} />}
+        </div> 
     );
 }
