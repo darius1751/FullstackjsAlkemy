@@ -107,8 +107,9 @@ export const CreateMovement = () => {
                     <input type = 'submit' value = 'agregar movimiento' className = "btn btn-add"/>
                     <input type = 'reset' value = 'limpiar' className = "btn btn-error"/>
                 </form>
+                { modal.state && <Modal title = {modal.title} description = {modal.description} type = {modal.type} handleAccept = {handleAccept} />}
             </div>            
-            { modal.state && <Modal title = {modal.title} description = {modal.description} type = {modal.type} handleAccept = {handleAccept} />}
+            
         </div> 
     );
 }
